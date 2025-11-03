@@ -21,13 +21,24 @@ export function ProjectsSection({
 }: ProjectsSectionProps) {
   const t = translations[language]
   const projects = getProjects(language)
+  
+  // Trier les projets : featured en premier, puis completed, puis in-progress
+  const sortedProjects = [...projects].sort((a, b) => {
+    // D'abord par featured
+    if (a.featured && !b.featured) return -1
+    if (!a.featured && b.featured) return 1
+    // Ensuite par status : completed avant in-progress
+    if (a.status === "completed" && b.status === "in-progress") return -1
+    if (a.status === "in-progress" && b.status === "completed") return 1
+    return 0
+  })
 
   return (
     <section className="space-y-6">
       <h2 className="text-3xl md:text-4xl font-bold mb-6">{t.projects.title}</h2>
       <p className="text-lg text-muted-foreground mb-8">{t.projects.subtitle}</p>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 max-w-full">
-        {projects.map((project) => (
+        {sortedProjects.map((project) => (
           <Link
             key={project.id}
             href={project.link}

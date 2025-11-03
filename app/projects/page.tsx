@@ -16,15 +16,26 @@ export default function ProjectsPage() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   // Filter projects based on search query
-  const filteredProjects = projects.filter((project) => {
-    if (!project || !project.title) return false
-    const query = searchQuery.toLowerCase()
-    return (
-      project.title.toLowerCase().includes(query) ||
-      project.description.toLowerCase().includes(query) ||
-      project.tech.some((tech) => tech.toLowerCase().includes(query))
-    )
-  })
+  const filteredProjects = projects
+    .filter((project) => {
+      if (!project || !project.title) return false
+      const query = searchQuery.toLowerCase()
+      return (
+        project.title.toLowerCase().includes(query) ||
+        project.description.toLowerCase().includes(query) ||
+        project.tech.some((tech) => tech.toLowerCase().includes(query))
+      )
+    })
+    // Trier les projets : featured en premier, puis completed, puis in-progress
+    .sort((a, b) => {
+      // D'abord par featured
+      if (a.featured && !b.featured) return -1
+      if (!a.featured && b.featured) return 1
+      // Ensuite par status : completed avant in-progress
+      if (a.status === "completed" && b.status === "in-progress") return -1
+      if (a.status === "in-progress" && b.status === "completed") return 1
+      return 0
+    })
 
   useEffect(() => {
     if (isDark) {

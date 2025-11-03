@@ -60,7 +60,7 @@ export const getProjects = (language: Language) => [
         : "Complete automatic license plate recognition system (ALPR) with vehicle detection via YOLOv5, OCR for plates, interactive web interface and detection history.",
     tech: ["Python", "Flask", "YOLOv5", "OpenCV", "PyTesseract", "SQLite"],
     link: "/projects/vehicle-identification",
-    featured: false,
+    featured: true,
     status: "completed" as const,
     url: "https://github.com/Trapuce/Identification-de-vehicule",
     fullDescription: language === "fr"
