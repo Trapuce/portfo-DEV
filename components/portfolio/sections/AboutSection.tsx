@@ -1,7 +1,7 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { Mail, ExternalLink, Zap } from "lucide-react"
+import { Mail, ExternalLink } from "lucide-react"
 import { Language, translations } from "@/lib/data/translations"
 import { SectionNavigation } from "../SectionNavigation"
 
@@ -26,9 +26,8 @@ export function AboutSection({
         <h2 className="text-3xl md:text-5xl font-bold text-muted-foreground mb-4 md:mb-6 animate-fade-in">
           Daouda TRAORE
         </h2>
-        <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold mb-6 md:mb-8 leading-tight flex items-center gap-3 flex-wrap">
-          <span className="inline-block animate-typing">{t.about.subtitle}</span>
-          <Zap className="h-6 w-6 md:h-8 md:w-8 text-purple-600 animate-pulse flex-shrink-0" />
+        <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold mb-6 md:mb-8 leading-tight">
+          <span className="inline-block animate-typing whitespace-nowrap">{t.about.subtitle}</span>
         </h1>
         <div className="space-y-4 text-base md:text-lg text-muted-foreground leading-relaxed mb-8">
           <p className="text-justify">{t.about.description1}</p>
